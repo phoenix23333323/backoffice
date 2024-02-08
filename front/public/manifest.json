@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "backoffice",
+  "name": "Gestion de votre entreprise",
   "icons": [
     {
       "src": "favicon.ico",
