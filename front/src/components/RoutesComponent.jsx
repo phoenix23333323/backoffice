@@ -1,29 +1,78 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import Header from './Header';
-import Footer from './Footer';
-
-import Layout from '../pages/Layout';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import PageError from '../pages/PageError';
+import Header from './Header';
+import Footer from './Footer';
 import Home from '../pages/Home';
-import Error404 from '../pages/Error404';
+import Company from '../pages/Company';
+import Clients from '../pages/Clients';
+import Client from '../pages/Client';
+import Suppliers from '../pages/Suppliers';
+import Users from '../pages/Users';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root />,
+    errorElement: <PageError />,
+    children: [
+      {
+        path: 'home',
+        element: <Home />,
+      },
+      {
+        path: 'company',
+        element: <Company />,
+      },
+      {
+        path: 'clients',
+        children: [
+          {
+            path: '',
+            element: <Clients />,
+          },
+          {
+            path: ':id',
+            element: <Client />,
+          },
+        ],
+      },
+      {
+        path: 'suppliers',
+        element: <Suppliers />,
+      },
+      {
+        path: 'users',
+        element: <Users />,
+      },
+    ],
+  },
+  {
+    path: '/signin',
+    element: <SignIn />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
+  },
+]);
+
+function Root() {
+  return (
+    <>
+      <Header />
+      <div className="main">
+        <Outlet />
+      </div>
+      <Footer />
+    </>
+  );
+}
 
 function RoutesComponent() {
-  return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/backoffice/" element={<Layout />} />
-        <Route path="/backoffice/signin" element={<SignIn />} />
-        <Route path="/backoffice/signup" element={<SignUp />} />
-        <Route path="/backoffice/home" element={<Home />} />
-        <Route path="/*" element={<Error404 />} />
-      </Routes>
-      <Footer />
-    </Router>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default RoutesComponent;

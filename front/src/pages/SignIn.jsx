@@ -5,10 +5,10 @@ function SignIn() {
     <div className="main">
       <h1>CONNEXION</h1>
       <button className="button">
-        <Link to="/backoffice/home">SE CONNECTER</Link>
+        <Link to="/home">SE CONNECTER</Link>
       </button>
       <button className="button">
-        <Link to="/backoffice/signup">CRÉER UN COMPTE</Link>
+        <Link to="/signup">CRÉER UN COMPTE</Link>
       </button>
     </div>
   );

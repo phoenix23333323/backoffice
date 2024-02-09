@@ -5,7 +5,7 @@ function SignUp() {
     <div className="main">
       <h1>CRÉATION</h1>
       <button className="button">
-        <Link to="/backoffice/signin">SE CONNECTER</Link>
+        <Link to="/signin">SE CONNECTER</Link>
       </button>
     </div>
   );
