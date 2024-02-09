@@ -1,12 +1,9 @@
-import logo from './assets/logo.png';
-import './styles/App.css';
+import RoutesComponent from './components/RoutesComponent';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
+        <RoutesComponent />
     </div>
   );
 }
