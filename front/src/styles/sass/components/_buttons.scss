@@ -1,0 +1,18 @@
+.button {
+    background-color: $tertiary-color;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 10px;
+    &:hover {
+        background-color: $secondary-color;
+        a {
+            color: $black-one;
+        }
+    }
+    a {
+        color: $black-two;
+        font-size: 18px;
+        font-weight: bold;
+    }
+}

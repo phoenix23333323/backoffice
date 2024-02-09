@@ -1,0 +1,27 @@
+$primary-color-one: #538d22;
+$primary-color-two: #669d31;
+$primary-color-three: #85bc54;
+$primary-color-four: #aad576;
+
+$secondary-color: #62b69e; 
+
+$tertiary-color: #caad7e;
+
+$white: #ecf8f6;
+$black-one: #1d1d1d;
+$black-two: #424340;
+
+$max-width: 1500px;
+$min-width: 320px;
+
+$max-height: 1500px;
+$min-height: 320px;
+
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);

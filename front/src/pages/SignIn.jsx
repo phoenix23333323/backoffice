@@ -2,10 +2,13 @@ import { Link } from 'react-router-dom';
 
 function SignIn() {
   return (
-    <div>
+    <div className="main">
       <h1>CONNEXION</h1>
-      <button>
+      <button className="button">
         <Link to="/backoffice/home">SE CONNECTER</Link>
+      </button>
+      <button className="button">
+        <Link to="/backoffice/signup">CRÉER UN COMPTE</Link>
       </button>
     </div>
   );

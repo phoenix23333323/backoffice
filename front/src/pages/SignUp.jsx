@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 
 function SignUp() {
   return (
-    <div>
-      <h1>CREATION</h1>
-      <button>
+    <div className="main">
+      <h1>CRÉATION</h1>
+      <button className="button">
         <Link to="/backoffice/signin">SE CONNECTER</Link>
       </button>
     </div>
