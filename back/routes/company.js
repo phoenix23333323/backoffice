@@ -3,14 +3,14 @@ const express = require('express');
 const router = express.Router();
 
 // Middlewares
-// const auth = require('../middlewares/auth');
+const auth = require('../middlewares/auth');
 // const multer = require('../middlewares/multer-config');
 
 // Controller
 const companyCtrl = require('../controllers/company');
 
 // Router
-router.get('/', companyCtrl.getAll);
+router.get('/', auth, companyCtrl.getAll);
 // router.get('/byUser', auth, postCtrl.getAllUserPost)
 // router.post('/', auth, multer, postCtrl.createPost)
 // router.put('/:id', auth, multer, postCtrl.modifyPost)

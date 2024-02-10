@@ -8,3 +8,5 @@ nodemon
 express
 body-parser
 @supabase/supabase-js
+bcrypt
+jsonwebtoken

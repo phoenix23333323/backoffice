@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // Définition des routes
+const usersRoutes = require('./routes/users');
 const companyRoutes = require('./routes/company');
 
 // CORS
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 });
 
 // Utilisation des routes
+app.use('/users', usersRoutes);
 app.use('/company', companyRoutes);
 
 // Exporte l'application
