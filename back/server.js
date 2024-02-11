@@ -1,5 +1,8 @@
+// Imports
 const http = require('http');
 const app = require('./app');
+const dotenv = require("dotenv");
+dotenv.config();
 
 // Renvoie un port valide, qu'il soit fourni sous la forme d'un numéro ou d'une chaîne.
 const normalizePort = val => {
@@ -12,7 +15,7 @@ const normalizePort = val => {
     }
     return false;
 };
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3080');
 app.set('port', port);
 
 // Recherche les différentes erreurs et les gère de manière appropriée.

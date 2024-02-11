@@ -1,6 +1,8 @@
 // Imports
 const express = require('express');
 const bodyParser = require('body-parser');
+const dotenv = require("dotenv");
+dotenv.config();
 
 // Créer une application Express
 const app = express();

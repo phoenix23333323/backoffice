@@ -10,3 +10,8 @@ body-parser
 @supabase/supabase-js
 bcrypt
 jsonwebtoken
+dotenv
+helmet
+express-rate-limit
+validator
+password-validator

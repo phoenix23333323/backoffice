@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 
 // Création d'un user
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10)
-    .then(hash => {
+    bcrypt.hash(req.body.password, parseInt(process.env.SALT))
+    .then((hash) => {
         const user = {
             company_id: 1,
             email: req.body.email,
@@ -14,38 +14,42 @@ exports.signup = (req, res, next) => {
             last_name: 'POTTER'
         }
         supabase.from('users').insert(user)
-        .then(() => {
-            res.status(201).json({
-                message: 'Utilisateur crée'
-            })
+        .then((err) => {
+            if(err.error != null) {
+                if(err.error.code == 23505) {
+                    return res.status(err.status).json({error: 'Email déjà utilisé'});
+                }
+                return res.status(400).json({error: 'Création du compte impossible'});
+            }
+            return res.status(201).json({message: 'Utilisateur crée'});
         })
-        .catch(error => {res.status(400).json({error: error})});
+        .catch((err) => {return res.status(400).json({error: 'Problème insert users'})});
     })
-    .catch(error => {res.status(500).json({error: error})});
+    .catch((err) => {return res.status(400).json({error: 'Problème lors du hasage du mot de passe'})});
 }
 
 // Connexion d'un user
 exports.signin = (req, res, next) => {
     supabase.from('users').select('*').eq('email', req.body.email)
-    .then(user => {
+    .then((user) => {
         if(user.data.length == 0) {
             return res.status(401).json({error:'Utilisateur non trouvé'});
         }
         bcrypt.compare(req.body.password, user.data[0].password)
-        .then(valid => {
+        .then((valid) => {
             if(!valid) {
                 return res.status(401).json({error:'Mot de passe incorrect'});
             }
-            res.status(200).json({
+            return res.status(200).json({
                 userId: user.data[0].id,
                 token: jwt.sign(
                     {userId: user.data[0].id},
-                    'RANDOM_TOKEN_SECRET',
+                    process.env.SECRET_TOKEN,
                     {expiresIn: '24h'}
                 )
             });
         })
-        .catch(error => {res.status(500).json({error: error})});
+        .catch((err) => {return res.status(500).json({error: 'Problème bcrypt password'})});
     })
-    .catch(error => {res.status(500).json({error: error})});
+    .catch((err) => {return res.status(500).json({error: 'Problème select users'})});
 }
