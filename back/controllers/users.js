@@ -4,28 +4,33 @@ const jwt = require('jsonwebtoken');
 
 // Création d'un user
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, parseInt(process.env.SALT))
-    .then((hash) => {
-        const user = {
-            company_id: 1,
-            email: req.body.email,
-            password: hash,
-            first_name: 'Fiona',
-            last_name: 'POTTER'
-        }
-        supabase.from('users').insert(user)
-        .then((err) => {
-            if(err.error != null) {
-                if(err.error.code == 23505) {
-                    return res.status(err.status).json({error: 'Email déjà utilisé'});
-                }
-                return res.status(400).json({error: 'Création du compte impossible'});
+    const salt = parseInt(process.env.SALT);
+    bcrypt.genSalt(salt)
+    .then((saltRes) => {
+        bcrypt.hash(req.body.password, saltRes)
+        .then((hash) => {
+            const user = {
+                company_id: 1,
+                email: req.body.email,
+                password: hash,
+                first_name: 'Fiona',
+                last_name: 'POTTER'
             }
-            return res.status(201).json({message: 'Utilisateur crée'});
+            supabase.from('users').insert(user)
+            .then((err) => {
+                if(err.error != null) {
+                    if(err.error.code == 23505) {
+                        return res.status(err.status).json({error: 'Email déjà utilisé'});
+                    }
+                    return res.status(400).json({error: 'Création du compte impossible'});
+                }
+                return res.status(201).json({message: 'Utilisateur crée'});
+            })
+            .catch((err) => {return res.status(400).json({error: 'Problème insert users'})});
         })
-        .catch((err) => {return res.status(400).json({error: 'Problème insert users'})});
+        .catch((err) => {return res.status(400).json({error: 'Problème lors du hasage du mot de passe'})});
     })
-    .catch((err) => {return res.status(400).json({error: 'Problème lors du hasage du mot de passe'})});
+    .catch((err) => {return res.status(400).json({error: 'Problème lors du saltage du mot de passe'})});
 }
 
 // Connexion d'un user
