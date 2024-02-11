@@ -12,6 +12,7 @@ bcrypt
 jsonwebtoken
 dotenv
 helmet
+cors
 express-rate-limit
 validator
 password-validator
