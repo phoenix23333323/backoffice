@@ -1,0 +1,15 @@
+.count-bloc {
+    position: relative;
+    border: 3px solid;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    &__content {
+        margin-top: 10px;
+    }
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+}

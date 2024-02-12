@@ -5,7 +5,7 @@ import SignUp from '../pages/SignUp';
 import PageError from '../pages/PageError';
 import Header from './Header';
 import Footer from './Footer';
-import Home from '../pages/Home';
+import Home from '../pages/Home.tsx';
 import Company from '../pages/Company';
 import Clients from '../pages/Clients';
 import Client from '../pages/Client';

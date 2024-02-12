@@ -1,10 +1,14 @@
 import RoutesComponent from './components/RoutesComponent';
+import { Provider } from 'react-redux';
+import { store } from './store/store.ts';
 
 function App() {
   return (
-    <div className="App">
-      <RoutesComponent />
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <RoutesComponent />
+      </div>
+    </Provider>
   );
 }
 
