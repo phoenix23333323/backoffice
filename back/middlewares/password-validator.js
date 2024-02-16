@@ -9,7 +9,6 @@ passwordSchema
 	.has().lowercase() // Doit contenir au moins un minuscule
 	.has().digits(1) // Doit contenir au moins un chiffre
 	.has().not().spaces() // Ne doit pas contenir d'espace
-	.is().not().oneOf(['1=1', 'OR a=a', '=', 'OR 1=1', 'Password123', 'Azerty123']) // Ne doit pas être une de ces valeurs
 
 // Test du mot de passe saisit par l'utilisateur
 module.exports = (req, res, next) => {

@@ -8,6 +8,10 @@ react-router
 react-router-dom
 @reduxjs/toolkit
 react-redux
+axios
+react-hook-form
+@hookform/resolvers
+zod
 
 # Getting Started with Create React App
 

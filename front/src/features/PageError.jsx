@@ -8,7 +8,7 @@ function PageError() {
       <h1>UNE ERREUR EST SURVENUE</h1>
       <p>{error?.error?.toString() ?? error?.toString()}</p>
       <button className="button">
-        <Link to="/home">RETOURNER A LA PAGE D'ACCUEIL</Link>
+        <Link to="/">RETOURNER A LA PAGE D'ACCUEIL</Link>
       </button>
     </>
   );

@@ -1,0 +1,75 @@
+.home {
+    &__presentation {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 20px;
+        p {
+            margin: 10px;
+        } 
+    }
+    &__apps {
+        display: flex;
+        .app {
+            border: 2px solid $border-color;
+            width: 110px;
+            height: 110px;
+            border-radius: 10px;
+            background-color: $primary-color;
+            margin: 5px;
+            cursor: pointer;
+            transition: transform .2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: bold;
+            padding: 5px;
+            &:hover {
+                transform: scale(1.1);
+                border-color: $green;
+            }
+            &--enabled {
+                color: $green;
+            }
+            &--disabled {
+                color: $red;
+                opacity: 0.4;
+                &:hover {
+                    transform: none;
+                    border-color: $red;
+                    :first-child {
+                        display: none;
+                    }
+                    :last-child {
+                        display: flex;
+                    }
+                    p {
+                        display: none;
+                    }
+                    &::after {
+                        content: "Accès refusé"
+                    }
+                }
+            }
+            &--to-come {
+                color: $orange;
+                opacity: 0.4;
+                &:hover {
+                    transform: none;
+                    border-color: $orange;
+                    :first-child {
+                        display: none;
+                    }
+                    :last-child {
+                        display: flex;
+                    }
+                    p {
+                        display: none;
+                    }
+                    &::after {
+                        content: "A venir"
+                    }
+                }
+            }
+        }
+    }
+}

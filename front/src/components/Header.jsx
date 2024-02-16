@@ -1,13 +1,22 @@
 import { NavLink } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+
 import { IconContext } from 'react-icons';
 import { PiBuildingsFill } from 'react-icons/pi';
 import { LiaUserTieSolid } from 'react-icons/lia';
 import { LiaUserTagSolid } from 'react-icons/lia';
 import { LiaUsersCogSolid } from 'react-icons/lia';
 import { MdLogout } from 'react-icons/md';
+
 import Logo from '../assets/logo.png';
 
 function Header() {
+  const { setAuth } = useAuth();
+
+  const handleClickLogout = () => {
+    setAuth({});
+  };
+
   return (
     <IconContext.Provider
       value={{ size: '30px', className: 'react-icons react-icons__nav' }}
@@ -15,7 +24,7 @@ function Header() {
       <header className="header">
         <nav className="header-nav">
           <div className="header-nav__logo">
-            <NavLink to="/home">
+            <NavLink to="/">
               <img src={Logo} alt="Logo" title="Page d'accueil"></img>
             </NavLink>
           </div>
@@ -34,9 +43,9 @@ function Header() {
             </NavLink>
           </div>
           <div className="header-nav__logout">
-            <NavLink to="/signin">
+            <button onClick={handleClickLogout}>
               <MdLogout title="Se déconnecter" />
-            </NavLink>
+            </button>
           </div>
         </nav>
       </header>

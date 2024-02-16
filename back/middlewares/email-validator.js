@@ -1,6 +1,6 @@
 const validator = require('validator');
 
-// Validationdu format de l'email
+// Validation du format de l'email
 module.exports = (req, res, next) => {
 	const email = req.body.email;
 	if (validator.isEmail(email) === true) {

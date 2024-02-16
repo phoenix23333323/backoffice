@@ -6,17 +6,7 @@
     box-sizing: border-box;
 }
 
-::-moz-selection{
-    background-color: $primary-color-one;
-    color: $white;
-}
-::selection{
-    background-color: $primary-color-one;
-    color: $white;
-}
-
 html {
-    background-color: $secondary-color;
     display: flex;
 }
 
@@ -31,8 +21,6 @@ body {
     max-height: $max-height;
     min-height: $min-height;
     margin: auto;
-    background-color: $black-one;
-    color:green;
 }
 
 .App {
@@ -44,14 +32,33 @@ body {
     flex-direction: column;
 }
 
+.main-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+
 .main {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    justify-content: space-between;
 }
 
 a {
     text-decoration: none;
     color: $white;
+}
+
+.relative {
+    position: relative;
+}
+
+.no-display {
+    display: none;
 }

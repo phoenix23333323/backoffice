@@ -91,7 +91,6 @@
 //   // },
 // });
 
-
 // COMPANY.JSX
 
 // import { useStore } from 'react-redux';
@@ -118,16 +117,10 @@
 
 // export default Company;
 
-
-
-
 // PACKAGE.JSON
 
 // {
 //     "homepage": "https://phoenix23333323.github.io/backoffice",
-//     "dependencies": {
-//       "axios": "^1.6.7",
-//     },
 //     "scripts": {
 //       "deploy": "gh-pages -d build",
 //     },
@@ -136,12 +129,34 @@
 //     }
 //   }
 
+// import { React, useEffect, useState } from 'react';
 
-// AXIOS.JS
+// function Company() {
+//   const [company, setCompany] = useState();
 
-// import { Axios } from 'axios';
+//   useEffect(() => {
+//     const fetchCompany = async () => {
+//       const response = await fetch('http://localhost:3080/company/2');
+//       const company = await response.json();
+//       setCompany(company);
+//     };
+//     fetchCompany();
+//   }, []);
+//   console.log(company);
 
-// const API_BASE_URL = 'http://localhost:3080/';
-// const axios = Axios.create({ baseURL: API_BASE_URL });
+//   return <>{}</>;
+// }
 
-// export default axios;
+// export default Company;
+
+// const {
+//     register,
+//     handleSubmit,
+//     setError,
+//     formState: { errors, isSubmitting },
+//   } = useForm({
+//     defaultValues: {
+//       email: 'fiona.potter@hotmail.fr',
+//     },
+//     resolver: zodResolver(schema),
+//   });

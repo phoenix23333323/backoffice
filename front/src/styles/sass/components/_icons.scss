@@ -1,3 +1,13 @@
 .react-icons {
-    color: $black-two;
+    &__auth {
+        position: absolute;
+        right: 15px;
+        top: 20px;
+        & + input {
+            padding-right: 40px;
+        }
+    }
+    &__nav {
+        color: $white;
+    }
 }

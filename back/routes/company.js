@@ -9,6 +9,7 @@ const auth = require('../middlewares/auth');
 const companyCtrl = require('../controllers/company');
 
 // Router
-router.get('/:id', auth, companyCtrl.getById);
+//router.get('/:id', auth, companyCtrl.getById);
+router.get('/:id', companyCtrl.getById);
 
 module.exports = router;

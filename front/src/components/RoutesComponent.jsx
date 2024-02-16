@@ -1,25 +1,29 @@
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp';
-import PageError from '../pages/PageError';
+import Auth from '../features/auth/Auth';
+import PageError from '../features/PageError';
 import Header from './Header';
 import Footer from './Footer';
-import Home from '../pages/Home.tsx';
-import Company from '../pages/Company';
-import Clients from '../pages/Clients';
-import Client from '../pages/Client';
-import Suppliers from '../pages/Suppliers';
-import Users from '../pages/Users';
+import Home from '../features/Home';
+import Company from '../features/Company';
+import Clients from '../features/Clients';
+import Client from '../features/Client';
+import Suppliers from '../features/Suppliers';
+import Users from '../features/Users';
+import ProtectedRoute from '../features/auth/ProtectedRoute.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
+    element: (
+      <ProtectedRoute>
+        <Root />
+      </ProtectedRoute>
+    ),
     errorElement: <PageError />,
     children: [
       {
-        path: 'home',
+        path: '',
         element: <Home />,
       },
       {
@@ -50,12 +54,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/signin',
-    element: <SignIn />,
-  },
-  {
-    path: '/signup',
-    element: <SignUp />,
+    path: '/auth',
+    element: <Auth />,
   },
 ]);
 
@@ -63,7 +63,7 @@ function Root() {
   return (
     <>
       <Header />
-      <div className="main">
+      <div className="main-root">
         <Outlet />
       </div>
       <Footer />

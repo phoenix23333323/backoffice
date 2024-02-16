@@ -18,11 +18,12 @@
 @import "./components/loading";
 
 // Layout
+@import "./layout/background";
 @import "./layout/header";
 @import "./layout/footer";
-@import "./layout/nav";
 @import "./layout/form";
 
 // Pages
+@import "./pages/home";
 
 // Themes
