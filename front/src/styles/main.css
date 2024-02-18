@@ -73,6 +73,14 @@ body {
   align-items: center;
 }
 
+.main-app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .main {
   position: absolute;
   width: 100%;
@@ -155,20 +163,29 @@ h1 {
   font-size: 15px;
 }
 
-.count-bloc {
-  position: relative;
-  border: 3px solid;
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-}
-.count-bloc__content {
-  margin-top: 10px;
-}
-.count-bloc__buttons {
+.button-icon {
   display: flex;
-  flex-direction: column;
-  margin-top: 10px;
+  align-items: center;
+}
+.button-icon button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #fff;
+  margin: 5px 0px;
+}
+.button-icon button svg {
+  margin-right: 5px;
+}
+.button-icon button:hover svg {
+  color: #669d31;
+}
+.button-icon input {
+  width: 75px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
 }
 
 .react-icons__auth {
@@ -402,6 +419,7 @@ h1 {
 .footer {
   padding: 5px;
   font-size: 12px;
+  margin-top: 20px;
 }
 
 .form-bloc {
@@ -547,6 +565,28 @@ h1 {
 }
 .home__apps .app--to-come:hover::after {
   content: "A venir";
+}
+
+.count-bloc {
+  display: flex;
+  position: relative;
+  border: 3px solid;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  margin: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.count-bloc__content {
+  font-size: 70px;
+}
+.count-bloc__buttons {
+  display: flex;
+  flex-direction: column;
+  width: 115px;
 }
 
 /*# sourceMappingURL=main.css.map */

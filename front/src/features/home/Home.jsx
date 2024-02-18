@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { IconContext } from 'react-icons';
 import { TbListNumbers } from 'react-icons/tb';
@@ -22,18 +23,14 @@ function Home() {
         </p>
         <p>
           Vous pouvez accéder aux différentes applications depuis cette page
-          d'accueil en cliquant sur le logo en haut à gauche.
-        </p>
-        <p>
-          Vous devez avoir des droits d'administrateur pour modifier des
-          informations.
+          d'accueil (au clique sur le logo en haut à gauche).
         </p>
       </div>
       <div className="home__apps">
-        <div className="app app--enabled">
+        <Link to="/counter" className="app app--enabled">
           <TbListNumbers />
           <p>Counter</p>
-        </div>
+        </Link>
         <div className="app app--enabled">
           <IoCalendarNumber />
           <p>Planning</p>

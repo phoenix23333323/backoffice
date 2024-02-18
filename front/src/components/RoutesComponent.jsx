@@ -1,16 +1,22 @@
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import Auth from '../features/auth/Auth';
-import PageError from '../features/PageError';
+import ProtectedRoute from '../features/auth/ProtectedRoute';
+
 import Header from './Header';
 import Footer from './Footer';
-import Home from '../features/Home';
+
+import Home from '../features/home/Home';
+
+import Counter from '../features/applications/Counter.tsx';
+
 import Company from '../features/Company';
 import Clients from '../features/Clients';
 import Client from '../features/Client';
 import Suppliers from '../features/Suppliers';
 import Users from '../features/Users';
-import ProtectedRoute from '../features/auth/ProtectedRoute.jsx';
+
+import PageError from '../features/PageError';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: 'users',
         element: <Users />,
+      },
+      {
+        path: 'counter',
+        element: <Counter />,
       },
     ],
   },
