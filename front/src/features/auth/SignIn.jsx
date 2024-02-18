@@ -41,9 +41,19 @@ function SignIn({ setIsSignup }) {
       setAuth({ admin, token, userId });
       navigate('/', { replace: true });
     } catch (e) {
-      setError('root', {
-        message: e.response.data.error,
-      });
+      if (!e?.response) {
+        setError('root', {
+          message: 'Le serveur ne réponds pas',
+        });
+      } else if (e.response.data.error) {
+        setError('root', {
+          message: e.response.data.error,
+        });
+      } else {
+        setError('root', {
+          message: e.response.request.statusText,
+        });
+      }
     }
   };
 

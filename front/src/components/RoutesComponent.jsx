@@ -20,6 +20,10 @@ import PageError from '../features/PageError';
 
 const router = createBrowserRouter([
   {
+    path: '/auth',
+    element: <Auth />,
+  },
+  {
     path: '/',
     element: (
       <ProtectedRoute>
@@ -62,10 +66,6 @@ const router = createBrowserRouter([
         element: <Counter />,
       },
     ],
-  },
-  {
-    path: '/auth',
-    element: <Auth />,
   },
 ]);
 
