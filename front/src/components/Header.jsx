@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import useLogout from '../hooks/useLogout';
 
 import { IconContext } from 'react-icons';
 import { PiBuildingsFill } from 'react-icons/pi';
@@ -11,10 +11,10 @@ import { MdLogout } from 'react-icons/md';
 import Logo from '../assets/logo.png';
 
 function Header() {
-  const { setAuth } = useAuth();
+  const logout = useLogout();
 
-  const handleClickLogout = () => {
-    setAuth({});
+  const handleClickLogout = async () => {
+    await logout();
   };
 
   return (

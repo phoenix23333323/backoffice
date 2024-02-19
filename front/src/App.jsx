@@ -1,23 +1,19 @@
-import { AuthProvider } from './features/auth/AuthProvider.jsx';
-import { Provider } from 'react-redux';
-import { store } from './store/store.ts';
+import useInterceptorsAxiosPrivate from './hooks/useInterceptorsAxiosPrivate';
 
 import Background from './components/Background';
 import RoutesComponent from './components/RoutesComponent';
 
-function App() {
+const App = () => {
+  const interceptorsAxiosPrivate = useInterceptorsAxiosPrivate();
+
   return (
-    <AuthProvider>
-      <Provider store={store}>
-        <div className="App">
-          <Background />
-          <div className="main">
-            <RoutesComponent />
-          </div>
-        </div>
-      </Provider>
-    </AuthProvider>
+    <div className="App">
+      <Background />
+      <div className="main">
+        <RoutesComponent />
+      </div>
+    </div>
   );
-}
+};
 
 export default App;

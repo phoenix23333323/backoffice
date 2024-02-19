@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../store/store.ts';
 import {
   increment,
   incrementByAmount,
@@ -8,7 +7,7 @@ import {
   decrementByAmount,
   incrementAsync,
   decrementAsync,
-} from '../../store/counter/counterSlice.ts';
+} from '../../store/counter/counterSlice.jsx';
 
 import LoadingBloc from '../../components/LoadingBloc.jsx';
 
@@ -17,9 +16,9 @@ import { FaPlusCircle } from 'react-icons/fa';
 import { FaMinusCircle } from 'react-icons/fa';
 
 function Counter() {
-  const count = useSelector((state: RootState) => state.counter.value);
-  const loaded = useSelector((state: RootState) => state.counter.loaded);
-  const dispatch = useDispatch<AppDispatch>();
+  const count = useSelector((state) => state.counter.value);
+  const loaded = useSelector((state) => state.counter.loaded);
+  const dispatch = useDispatch();
 
   const [numberDecrement, setNumberDecrement] = useState(0);
   const [numberIncrement, setNumberIncrement] = useState(0);

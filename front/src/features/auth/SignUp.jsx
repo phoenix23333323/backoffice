@@ -36,10 +36,7 @@ function SignUp({ setIsSignup }) {
 
   const handleSubmitRegister = async (data) => {
     try {
-      const signupRes = await axios.post('/users/signup', data, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      });
+      const signupRes = await axios.post('/users/signup', data);
       setMessage(signupRes.data.message);
     } catch (e) {
       if (!e?.response) {

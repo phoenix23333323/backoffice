@@ -1,5 +1,6 @@
 // Imports
 const express = require('express');
+const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 // Définition des routes
 const usersRoutes = require('./routes/users');
 const companyRoutes = require('./routes/company');
+const refreshCtrl = require('./controllers/refreshToken');
 
 // CORS : Cross Origine Policies
 app.use(
@@ -31,17 +33,12 @@ app.use(
 		optionsSuccessStatus: 200,
 	})
 )
-// app.use((req, res, next) => {
-//     // Accès depuis n'importe quelle origine
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     // Ajouter les headers mentionnés aux requêtes envoyées vers notre API
-//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-//     // Envoyer des requêtes avec les méthodes mentionnées
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-//     next();
-// });
+
+// Cookie parser pour lire le refreshToken du httpOnlyCookie et express
+app.use(cookieParser());
 
 // Utilisation des routes
+app.get('/refreshToken', refreshCtrl.refreshedToken);
 app.use('/users', usersRoutes);
 app.use('/company', companyRoutes);
 

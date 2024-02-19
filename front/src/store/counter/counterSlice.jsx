@@ -1,11 +1,6 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-interface CounterState {
-  value: number;
-  loaded: number;
-}
-
-const initialState: CounterState = {
+const initialState = {
   value: 0,
   loaded: 1,
 };
@@ -18,7 +13,7 @@ const counterSlice = createSlice({
       state.value += 1;
       state.loaded = 1;
     },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
+    incrementByAmount: (state, action) => {
       state.value += action.payload;
       state.loaded = 1;
     },
@@ -26,7 +21,7 @@ const counterSlice = createSlice({
       state.value -= 1;
       state.loaded = 1;
     },
-    decrementByAmount: (state, action: PayloadAction<number>) => {
+    decrementByAmount: (state, action) => {
       state.value -= action.payload;
       state.loaded = 1;
     },
@@ -36,29 +31,23 @@ const counterSlice = createSlice({
       .addCase(incrementAsync.pending, (state) => {
         state.loaded = 0;
       })
-      .addCase(
-        incrementAsync.fulfilled,
-        (state, action: PayloadAction<number>) => {
-          state.value += action.payload;
-          state.loaded = 1;
-        },
-      )
+      .addCase(incrementAsync.fulfilled, (state, action) => {
+        state.value += action.payload;
+        state.loaded = 1;
+      })
       .addCase(decrementAsync.pending, (state) => {
         state.loaded = 0;
       })
-      .addCase(
-        decrementAsync.fulfilled,
-        (state, action: PayloadAction<number>) => {
-          state.value -= action.payload;
-          state.loaded = 1;
-        },
-      );
+      .addCase(decrementAsync.fulfilled, (state, action) => {
+        state.value -= action.payload;
+        state.loaded = 1;
+      });
   },
 });
 
 export const incrementAsync = createAsyncThunk(
   'counter/incrementAsync',
-  async (amount: number) => {
+  async (amount) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     return amount;
   },
@@ -66,7 +55,7 @@ export const incrementAsync = createAsyncThunk(
 
 export const decrementAsync = createAsyncThunk(
   'counter/decrementAsync',
-  async (amount: number) => {
+  async (amount) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     return amount;
   },

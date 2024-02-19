@@ -46,17 +46,60 @@ exports.signin = (req, res, next) => {
             if(!valid) {
                 return res.status(401).json({error:'Mot de passe incorrect !'});
             }
-            return res.status(200).json({
-                admin: user.data[0].admin,
-                userId: user.data[0].id,
-                token: jwt.sign(
-                    {userId: user.data[0].id},
-                    process.env.SECRET_TOKEN,
-                    {expiresIn: '24h'}
-                )
-            });
+            const refreshToken = jwt.sign(
+                { userId: user.data[0].id, admin: user.data[0].admin},
+                process.env.REFRESH_SECRET_TOKEN,
+                { expiresIn: '24h' }
+            )
+            supabase.from('users').update({ refresh_token: refreshToken }).eq('id', user.data[0].id)
+            .then(() => {
+                res.cookie('refreshToken', refreshToken, {
+                    httpOnly: true,
+                    sameSite: 'None',
+                    secure: true,
+                    maxAge: 24 * 60 * 60 * 1000,
+                })
+                return res.status(200).json({
+                    admin: user.data[0].admin,
+                    userId: user.data[0].id,
+                    token: jwt.sign(
+                        {userId: user.data[0].id, admin: user.data[0].admin},
+                        process.env.SECRET_TOKEN,
+                        {expiresIn: '1h'}
+                    )
+                });
+            })
+            .catch((err) => {return res.status(400).json({error: 'Problème update refresh token users !'})});
         })
         .catch((err) => {return res.status(500).json({error: 'Problème bcrypt password !'})});
+    })
+    .catch((err) => {return res.status(500).json({error: 'Problème select users !'})});
+}
+
+exports.logout = (req, res, next) => {
+	const cookies = req.cookies;
+
+	if (!cookies?.refreshToken) {
+		return res.status(204).json({ error: 'Pas de cookies' })
+  }
+
+  supabase.from('users').update({ refresh_token: null }).eq('refresh_token', cookies.refreshToken)
+  .then(() => {
+    res.clearCookie('refreshToken', {
+      httpOnly: true,
+      samesite: 'None',
+      secure: true,
+    })
+    return res.status(204).json({ message: 'Cookie supprimé' })
+  })
+  .catch((err) => {return res.status(400).json({error: 'Problème update refresh token users !'})});
+}
+
+// Récupération des users
+exports.getUsers = (req, res, next) => {
+    supabase.from('users').select('*')
+    .then((users) => {
+        return res.status(200).json({ users: users.data });
     })
     .catch((err) => {return res.status(500).json({error: 'Problème select users !'})});
 }

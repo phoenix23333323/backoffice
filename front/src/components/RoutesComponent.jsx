@@ -1,22 +1,22 @@
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import Auth from '../features/auth/Auth';
-import ProtectedRoute from '../features/auth/ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute';
 
 import Header from './Header';
 import Footer from './Footer';
 
 import Home from '../features/home/Home';
 
-import Counter from '../features/applications/Counter.tsx';
+import Counter from '../features/applications/Counter';
 
 import Company from '../features/Company';
 import Clients from '../features/Clients';
 import Client from '../features/Client';
 import Suppliers from '../features/Suppliers';
-import Users from '../features/Users';
+import Users from '../features/users/Users';
 
-import PageError from '../features/PageError';
+import PageError from '../features/error/PageError';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,14 @@ const router = createBrowserRouter([
         <Root />
       </ProtectedRoute>
     ),
-    errorElement: <PageError />,
+    errorElement: (
+      <>
+        <div className="main-root">
+          <PageError />
+        </div>
+        <Footer />
+      </>
+    ),
     children: [
       {
         path: '',

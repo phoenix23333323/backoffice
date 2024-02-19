@@ -1,5 +1,5 @@
 import { React } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -28,18 +28,17 @@ function SignIn({ setIsSignup }) {
 
   const { setAuth } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   const handleSubmitLogin = async (data) => {
     try {
-      const signinRes = await axios.post('/users/signin', data, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      });
+      const signinRes = await axios.post('/users/signin', data);
       const admin = signinRes?.data?.admin;
       const token = signinRes?.data?.token;
       const userId = signinRes?.data?.userId;
       setAuth({ admin, token, userId });
-      navigate('/', { replace: true });
+      navigate(from, { replace: true });
     } catch (e) {
       if (!e?.response) {
         setError('root', {
