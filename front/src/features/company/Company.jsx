@@ -30,10 +30,10 @@ const schema = z.object({
 function Company() {
   const [message, setMessage] = useState();
   const { auth } = useAuth();
+  const isInputEnabled = !auth.admin ? 'disabled' : '';
 
   const dispatch = useDispatch();
   const companyId = useSelector((state) => state.company.companyId);
-  const company = useSelector((state) => state.company.company);
   const loaded = useSelector((state) => state.company.loaded);
 
   const {
@@ -70,8 +70,6 @@ function Company() {
       },
     );
   };
-
-  const isInputEnabled = !auth.admin ? 'disabled' : '';
 
   return (
     <>
