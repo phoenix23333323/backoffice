@@ -19,15 +19,19 @@ exports.refreshedToken = (req, res, next) => {
 			delete user.iat
 			delete user.exp
 
-			return res.status(200).json({
-				admin: user.admin,
-				userId: user.userId,
-				token: jwt.sign(
-						{userId: user.userId, admin: user.admin},
-						process.env.SECRET_TOKEN,
-						{expiresIn: '1h'}
-				)
-			});
+			supabase.from('users').select('company_id').eq('id', user.userId)
+			.then((data) => {
+				return res.status(200).json({
+					companyId: data.data[0].company_id,
+					admin: user.admin,
+					userId: user.userId,
+					token: jwt.sign(
+							{userId: user.userId, admin: user.admin},
+							process.env.SECRET_TOKEN,
+							{expiresIn: '1h'}
+					)
+				});
+			})
 		})
 	})
 	.catch((err) => {return res.status(404).json({error: 'Aucun refreshToken valide trouvé'})});

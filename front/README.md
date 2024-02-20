@@ -1,18 +1,3 @@
-# dependances
-
-@babel/plugin-proposal-private-property-in-object
-node-sass
-prettier
-react-icons
-react-router
-react-router-dom
-@reduxjs/toolkit
-react-redux
-axios
-react-hook-form
-@hookform/resolvers
-zod
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

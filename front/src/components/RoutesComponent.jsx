@@ -2,6 +2,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import Auth from '../features/auth/Auth';
 import ProtectedRoute from './ProtectedRoute';
+import PersistLogin from './PersistLogin';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -10,7 +11,7 @@ import Home from '../features/home/Home';
 
 import Counter from '../features/applications/Counter';
 
-import Company from '../features/Company';
+import Company from '../features/company/Company';
 import Clients from '../features/Clients';
 import Client from '../features/Client';
 import Suppliers from '../features/Suppliers';
@@ -26,9 +27,11 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <ProtectedRoute>
-        <Root />
-      </ProtectedRoute>
+      <PersistLogin>
+        <ProtectedRoute>
+          <Root />
+        </ProtectedRoute>
+      </PersistLogin>
     ),
     errorElement: (
       <>
@@ -76,7 +79,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-function Root() {
+export function Root() {
   return (
     <>
       <Header />

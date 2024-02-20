@@ -62,6 +62,7 @@ exports.signin = (req, res, next) => {
                 return res.status(200).json({
                     admin: user.data[0].admin,
                     userId: user.data[0].id,
+                    companyId: user.data[0].company_id,
                     token: jwt.sign(
                         {userId: user.data[0].id, admin: user.data[0].admin},
                         process.env.SECRET_TOKEN,

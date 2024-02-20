@@ -1,4 +1,5 @@
 import { React } from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -6,6 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import useAuth from '../../hooks/useAuth';
 import axios from '../../api/axios';
+
+import { setCompanyId } from '../../store/company/companySlice';
 
 import { IconContext } from 'react-icons';
 import { FaUser } from 'react-icons/fa';
@@ -31,13 +34,20 @@ function SignIn({ setIsSignup }) {
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
 
+  const dispatch = useDispatch();
+
   const handleSubmitLogin = async (data) => {
     try {
       const signinRes = await axios.post('/users/signin', data);
+
       const admin = signinRes?.data?.admin;
       const token = signinRes?.data?.token;
       const userId = signinRes?.data?.userId;
       setAuth({ admin, token, userId });
+
+      const companyId = signinRes?.data?.companyId;
+      dispatch(setCompanyId(companyId));
+
       navigate(from, { replace: true });
     } catch (e) {
       if (!e?.response) {

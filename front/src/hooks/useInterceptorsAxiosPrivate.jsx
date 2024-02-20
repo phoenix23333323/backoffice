@@ -31,9 +31,7 @@ const useInterceptorsAxiosPrivate = () => {
         ) {
           originalRequest._retry = true;
 
-          const response = await axios.get('/refreshToken', {
-            withCredentials: true,
-          });
+          const response = await axios.get('/refreshToken');
 
           setAuth({
             admin: response.data.admin,

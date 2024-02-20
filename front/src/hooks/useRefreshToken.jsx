@@ -1,19 +1,33 @@
+import { useLocation, Navigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 import axios from '../api/axios';
 import useAuth from './useAuth';
 
+import { setCompanyId } from '../store/company/companySlice';
+
 const useRefreshToken = () => {
   const { setAuth } = useAuth();
+  const location = useLocation();
+  const dispatch = useDispatch();
 
   const refresh = async () => {
-    const response = await axios.get('/refreshToken', {
-      withCredentials: true,
-    });
-    const admin = response.data.admin;
-    const token = response.data.token;
-    const userId = response.data.userId;
-    setAuth({ admin, token, userId });
+    try {
+      const response = await axios.get('/refreshToken');
 
-    return token;
+      setAuth({
+        admin: response.data.admin,
+        token: response.data.token,
+        userId: response.data.userId,
+      });
+
+      const companyId = response.data.companyId;
+      dispatch(setCompanyId(companyId));
+
+      return response.data.token;
+    } catch (e) {
+      <Navigate to="/auth" state={{ from: location }} replace />;
+    }
   };
 
   return refresh;

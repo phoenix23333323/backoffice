@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import useLogout from '../hooks/useLogout';
 
 import { IconContext } from 'react-icons';
@@ -11,10 +11,12 @@ import { MdLogout } from 'react-icons/md';
 import Logo from '../assets/logo.png';
 
 function Header() {
+  const navigate = useNavigate();
   const logout = useLogout();
 
   const handleClickLogout = async () => {
     await logout();
+    navigate('/auth');
   };
 
   return (

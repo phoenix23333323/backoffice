@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/eslint-parser": "^7.23.10",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@hookform/resolvers": "^3.3.4",
     "@reduxjs/toolkit": "^2.1.0",
@@ -10,6 +11,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
+    "eslint": "^7.32.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
     "node-sass": "^7.0.3",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
@@ -31,12 +34,6 @@
     "eject": "react-scripts eject",
     "sass": "sass --watch ./src/styles/sass/main.scss:./src/styles/main.css",
     "sass-min": "sass --watch ./src/styles/sass/main.scss:./src/styles/main.min.css --style compressed"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
