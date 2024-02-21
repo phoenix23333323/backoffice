@@ -25,3 +25,4 @@ Compte administrateur pour modifications : admin@admin.fr / Admin29530
 - Réaliser un component séparé pour les apps de la page d'accueil
 - Responsive
 - Documentation utilisateur
+- Documentation API
