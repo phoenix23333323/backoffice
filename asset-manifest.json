@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/backoffice/static/css/main.e80e328a.css",
+    "main.js": "/backoffice/static/js/main.44d0b037.js",
+    "static/media/logo.png": "/backoffice/static/media/logo.d40eb9b7048903cbaa8b.png",
+    "index.html": "/backoffice/index.html",
+    "main.e80e328a.css.map": "/backoffice/static/css/main.e80e328a.css.map",
+    "main.44d0b037.js.map": "/backoffice/static/js/main.44d0b037.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e80e328a.css",
+    "static/js/main.44d0b037.js"
+  ]
+}
