@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import useRefreshToken from '../hooks/useRefreshToken';
 import useAuth from '../hooks/useAuth';
@@ -12,7 +12,6 @@ const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
   const refresh = useRefreshToken();
   const { auth } = useAuth();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const verifyRefreshToken = async () => {
@@ -28,23 +27,15 @@ const PersistLogin = () => {
     !auth?.token ? verifyRefreshToken() : setIsLoading(false);
   }, []);
 
-  console.log(auth.token);
-
-  return (
+  return isLoading ? (
+    <LoadingBloc />
+  ) : (
     <>
-      {!auth.token ? (
-        navigate('/auth')
-      ) : isLoading ? (
-        <LoadingBloc />
-      ) : (
-        <>
-          <Header />
-          <div className="main-root">
-            <Outlet />
-          </div>
-          <Footer />
-        </>
-      )}
+      <Header />
+      <div className="main-root">
+        <Outlet />
+      </div>
+      <Footer />
     </>
   );
 };

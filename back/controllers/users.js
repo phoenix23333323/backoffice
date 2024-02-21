@@ -72,11 +72,12 @@ exports.signin = (req, res, next) => {
             })
             .catch((err) => {return res.status(400).json({error: 'Problème update refresh token users !'})});
         })
-        .catch((err) => {return res.status(500).json({error: 'Problème bcrypt password !'})});
+        .catch((err) => {return res.status(400).json({error: 'Problème bcrypt password !'})});
     })
-    .catch((err) => {return res.status(500).json({error: 'Problème select users !'})});
+    .catch((err) => {return res.status(400).json({error: 'Problème select users !'})});
 }
 
+// Déconnexion d'un user
 exports.logout = (req, res, next) => {
 	const cookies = req.cookies;
 
@@ -98,9 +99,43 @@ exports.logout = (req, res, next) => {
 
 // Récupération des users
 exports.getUsers = (req, res, next) => {
-    supabase.from('users').select('*')
+    supabase.from('users').select('*').eq('actif',true)
     .then((users) => {
-        return res.status(200).json({ users: users.data });
+        return res.status(200).json({ message: 'Les utilisateurs ont bien été récupérés', users: users.data });
     })
-    .catch((err) => {return res.status(500).json({error: 'Problème select users !'})});
+    .catch((err) => {return res.status(400).json({error: 'Problème select users !'})});
+}
+
+// Modification d'un user
+exports.updateUser = (req, res, next) => {
+    // supabase.from('users').select('id').eq('email',req.body.email)
+    // .then((user) => {
+    //     if(user.data.length == 1) {
+    //         return res.status(400).json({ error: 'Adresse email déjà utilisé, modification impossible' } )
+    //     } else {
+            supabase.from('users').update( req.body ).eq('id',req.params.id).select()
+            .then((user) => {
+                return res.status(200).json({ message: 'L\'utilisateur à bien été mis à jour', user: user.data } )
+            })
+            .catch((err) => {return res.status(400).json({error: 'Problème update user'})});
+    //     }
+    // })
+    // .catch((err) => {return res.status(400).json({error: 'Problème select users !'})});
+}
+
+// Désactivation d'un user
+exports.deleteUser = (req, res, next) => {
+    supabase.from('users').select('*').eq('id',req.params.id).select()
+    .then((user) => {
+        if(user.data[0].admin) {
+            return res.status(400).json({ error: 'L\'utilisateur est admin, vous ne pouvez pas le supprimer'} )
+        } else {
+            supabase.from('users').update({actif:false}).eq('id',req.params.id).select()
+            .then((user) => {
+                return res.status(200).json({ message: 'L\'utilisateur est désactivé', user: user.data } )
+            })
+            .catch((err) => {return res.status(400).json({error: 'Problème update actif user'})});
+        }
+    })
+    .catch((err) => {return res.status(400).json({error: 'Problème select users !'})});
 }

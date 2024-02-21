@@ -16,5 +16,8 @@ router.post('/signup', emailValidator, passwordValidator, usersCtrl.signup);
 router.post('/signin', limiter.limiter, usersCtrl.signin);
 router.get('/logout', usersCtrl.logout);
 router.get('/getUsers', auth, usersCtrl.getUsers);
+router.put('/updateUser/:id', auth, usersCtrl.updateUser);
+router.put('/deleteUser/:id', auth, usersCtrl.deleteUser);
+
 
 module.exports = router;

@@ -1,4 +1,4 @@
-import { useLocation, Navigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import axios from '../api/axios';
@@ -8,8 +8,9 @@ import { setCompanyId } from '../store/company/companySlice';
 
 const useRefreshToken = () => {
   const { setAuth } = useAuth();
-  const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const refresh = async () => {
     try {
@@ -26,7 +27,7 @@ const useRefreshToken = () => {
 
       return response.data.token;
     } catch (e) {
-      <Navigate to="/auth" state={{ from: location }} replace />;
+      navigate('/auth', { state: { from: location } });
     }
   };
 

@@ -1,0 +1,22 @@
+.table-datagrid {
+  margin: 0px 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.MuiDataGrid-footerContainer,
+.MuiDataGrid-columnHeaders {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.Mui-selected {
+  background-color: $primary-color !important;
+}
+
+.MuiDataGrid-root {
+  .MuiDataGrid-cell:focus,
+  .MuiDataGrid-cell:focus-within,
+  .MuiDataGrid-columnHeader:focus,
+  .MuiDataGrid-columnHeader:focus-within {
+    outline: none !important;
+  }
+}

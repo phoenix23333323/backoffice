@@ -11,8 +11,8 @@ import { MdLogout } from 'react-icons/md';
 import Logo from '../assets/logo.png';
 
 function Header() {
-  const navigate = useNavigate();
   const logout = useLogout();
+  const navigate = useNavigate();
 
   const handleClickLogout = async () => {
     await logout();

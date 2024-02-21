@@ -39,20 +39,20 @@ function Home() {
           <p>Counter</p>
           <AiOutlineStop className="no-display" />
         </Link>
-        <div className={appEnabled}>
+        <div className={appToCome}>
           <IoCalendarNumber />
           <p>Planning</p>
-          <AiOutlineStop className="no-display" />
+          <PiClockCountdownFill className="no-display" />
         </div>
         <div className={appToCome}>
           <IoShareSocialSharp />
           <p>Social Place</p>
           <PiClockCountdownFill className="no-display" />
         </div>
-        <div className={isAppAcces}>
+        <div className={appToCome}>
           <IoDocumentLock />
           <p>GED</p>
-          <AiOutlineStop className="no-display" />
+          <PiClockCountdownFill className="no-display" />
         </div>
         <div className={appToCome}>
           <PiTreeStructureFill />

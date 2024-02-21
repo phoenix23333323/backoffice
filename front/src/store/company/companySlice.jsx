@@ -37,7 +37,7 @@ const companySlice = createSlice({
 
 export const getCompany = createAsyncThunk(
   'company/getCompany',
-  async (data, thunkAPI) => {
+  async (data) => {
     try {
       const response = await axiosPrivate.get(
         '/company/getCompany/' + data.companyId,
@@ -49,7 +49,7 @@ export const getCompany = createAsyncThunk(
       );
       return {
         data: response.data.company[0],
-        message: "L'entreprise à bien été récupéré",
+        message: response.data.message,
       };
     } catch (e) {
       console.log(e);
@@ -59,7 +59,7 @@ export const getCompany = createAsyncThunk(
 
 export const updateCompany = createAsyncThunk(
   'company/updateCompany',
-  async (data, thunkAPI) => {
+  async (data) => {
     try {
       const response = await axiosPrivate.put(
         '/company/updateCompany/' + data.companyId,
@@ -72,7 +72,7 @@ export const updateCompany = createAsyncThunk(
       );
       return {
         data: response.data.company[0],
-        message: "L'entreprise à bien été mis à jour",
+        message: response.data.message,
       };
     } catch (e) {
       console.log(e);

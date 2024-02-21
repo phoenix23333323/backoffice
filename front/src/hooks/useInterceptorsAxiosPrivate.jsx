@@ -5,6 +5,7 @@ import useAuth from './useAuth';
 const useInterceptorsAxiosPrivate = () => {
   const { auth } = useAuth();
   const { setAuth } = useAuth();
+  const controller = new AbortController();
 
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(
@@ -39,12 +40,11 @@ const useInterceptorsAxiosPrivate = () => {
             userId: response.data.userId,
           });
 
-          originalRequest.headers['authorization'] =
-            `Bearer ${response.data.token}`;
+          originalRequest.headers['authorization'] = `Bearer ${response}`;
 
           return axiosPrivate(originalRequest);
         }
-        Promise.reject(error);
+        return Promise.reject(error);
       },
     );
 
